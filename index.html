@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+  <meta charset="utf-8">
+  <title>Login Page</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+  <div class="box">
+    <div class="box-button">
+      <button id="buttonLogin" onclick="showLogin()">Login</button>
+      <button id="buttonSignIn" onclick="showSignIn()">Sign in</button>
+    </div>
+
+    <form id="loginForm" action="php/login.php" method="post" hidden>
+      <input type="text" name="" placeholder="Username">
+      <input type="password" name="" placeholder="Password">
+      <input type="submit" name="" value="Login">
+    </form>
+
+    <form id="signUpForm" action="php/signUp.php" method="post" hidden>
+      <input type="email" name="" placeholder="Email">
+      <input type="text" name="" placeholder="Username">
+      <input type="password" name="" placeholder="Password">
+      <input type="submit" name="" value="Sign up">
+    </form>
+  </div>
+
+  <script>
+    let loginForm = document.getElementById("loginForm")
+    let signUpForm = document.getElementById("signUpForm")
+
+    let buttonLogin = document.getElementById("buttonLogin")
+    let buttonSignIn = document.getElementById("buttonSignIn")
+
+    let buttonOnBorder = '2px solid #ffe819'
+    let buttonOffBorder = '2px solid #3498db'
+
+    function showLogin() {
+      if (loginForm.hidden) {
+        loginForm.hidden = false
+        buttonLogin.style.border = buttonOnBorder
+        signUpForm.hidden = true
+        buttonSignIn.style.border = buttonOffBorder
+      }
+    }
+
+    function showSignIn() {
+      if (signUpForm.hidden) {
+        signUpForm.hidden = false
+        buttonSignIn.style.border = buttonOnBorder
+        loginForm.hidden = true
+        buttonLogin.style.border = buttonOffBorder
+      }
+    }
+
+    showLogin()
+  </script>
+
+</body>
+
+</html>
