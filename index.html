@@ -5,6 +5,7 @@
   <meta charset="utf-8">
   <title>Login Page</title>
   <link rel="stylesheet" href="css/style.css">
+  <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
 </head>
 
 <body>
@@ -15,21 +16,22 @@
       <button id="buttonSignIn" onclick="showSignIn()">Sign in</button>
     </div>
 
-    <form id="loginForm" action="php/login.php" method="post" hidden>
-      <input type="text" name="" placeholder="Username">
-      <input type="password" name="" placeholder="Password">
+    <form id="loginForm" action="./php/login.php" method="post" hidden>
+      <input type="text" name="login" placeholder="login" required>
+      <input type="password" name="password" placeholder="password" required>
       <input type="submit" name="" value="Login">
     </form>
 
-    <form id="signUpForm" action="php/signUp.php" method="post" hidden>
-      <input type="email" name="" placeholder="Email">
-      <input type="text" name="" placeholder="Username">
-      <input type="password" name="" placeholder="Password">
+    <form id="signUpForm" action="./php/signUp.php" method="post" hidden>
+      <input type="text" name="login" placeholder="login" required>
+      <input type="password" name="password" placeholder="password" required>
+      <input type="password" name="confPassword" placeholder="confirm password" required>
+      <input type="email" name="email" placeholder="email" required>
       <input type="submit" name="" value="Sign up">
     </form>
   </div>
 
-  <script>
+  <script type='text/javascript'> // script for buttons
     let loginForm = document.getElementById("loginForm")
     let signUpForm = document.getElementById("signUpForm")
 
@@ -59,6 +61,47 @@
 
     showLogin()
   </script>
+
+<script type='text/javascript'> // script for upload data
+  $("#loginForm").submit(function(event) {
+    event.preventDefault();
+
+    var $form = $( this )
+    var url = $form.attr( 'action' );
+
+    var posting = $.post( url,  {
+        login: $form[0][0].value,
+        password: $form[0][1].value,
+      }).success(function(msg) {
+      alert("All right!")
+      console.log(msg)
+    })
+    .error(function(err) {
+      alert(`Error ${err.status}!!!`)
+      console.log(err)
+    })
+  })
+
+  $("#signUpForm").submit(function(event) {
+    event.preventDefault();
+
+    var $form = $( this )
+    var url = $form.attr( 'action' );
+    var posting = $.post( url, {
+        login: $form[0][0].value,
+        password: $form[0][1].value,
+        confPassword: $form[0][2].value,
+        email: $form[0][3].value,
+      }).success(function(msg) {
+        alert("All right!")
+        console.log(msg)
+      })
+      .error(function(err) {
+        alert(`Error ${err.status}!!!`)
+        console.log(err)
+      })
+  })
+</script>
 
 </body>
 
